@@ -9,4 +9,7 @@ app.use(
   swaggerUi.setup(swaggerDocument, null)
 );
 
-app.listen(() => console.log("localhost:3005/mx-facturacion"));
+const puerto = process.env.PORT || 3000;
+app.listen(puerto, () =>
+  console.log("localhost:" + puerto + "/mx-facturacion")
+);
