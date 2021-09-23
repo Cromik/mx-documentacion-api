@@ -1,0 +1,379 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger MX-General"
+  },
+  "host": "localhost:2020",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "Productos",
+      "description": "Apis para proceso de Productos"
+    },
+    {
+      "name": "Clientes",
+      "description": "Apis para proceso de Clientes"
+    },
+    {
+      "name": "Ivas",
+      "description": "Apis para proceso de Ivas"
+    },
+    {
+      "name": "Tipos Identificacion",
+      "description": "Apis para los tipo de identificación"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/productos": {
+      "get": {
+        "tags": ["Productos"],
+        "description": "Obtener Listado de los Productos",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "codigoEmpresa",
+            "in": "query",
+            "description": "Codigo de la empresa",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Numero de pagina",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Numero de pagina",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "estado",
+            "in": "query",
+            "description": "Estado del registro, por default solo trae activos",
+            "type": "string",
+            "enum": ["A", "I", "T"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Respuesta correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "codigoProducto": {
+                      "type": "number"
+                    },
+                    "codigoAuxiliar": {
+                      "type": "string"
+                    },
+                    "nombreProducto": {
+                      "type": "string",
+                      "example": "COMBO CORE I3 9000 8MB RAM 500GB SDD"
+                    },
+                    "precioUnitario": {
+                      "type": "number"
+                    },
+                    "tipoProducto": {
+                      "type": "string",
+                      "enum": ["B", "S"],
+                      "example": "B"
+                    },
+                    "codigoIva": {
+                      "type": "integer"
+                    },
+                    "descripcionIva": {
+                      "type": "string"
+                    },
+                    "codigoIce": {
+                      "type": "integer"
+                    },
+                    "descripcionIce": {
+                      "type": "string"
+                    },
+                    "codigoIrbpnr": {
+                      "type": "integer"
+                    },
+                    "descripcionIrbpnr": {
+                      "type": "string"
+                    },
+                    "estado": {
+                      "type": "string",
+                      "enum": ["A", "I", "T"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": ["write:pets", "read:pets"]
+          }
+        ]
+      }
+    },
+    "/ivas": {
+      "get": {
+        "tags": ["Ivas"],
+        "description": "Obtener listado de los impuesto de valor agregado.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "query",
+            "description": "Estado del registro, por default solo trae activos",
+            "type": "string",
+            "enum": ["A", "I", "T"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Respuesta correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "codigoIva": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "codigoAuxiliar": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "descripcionIva": {
+                      "type": "string",
+                      "example": "0%"
+                    },
+                    "estado": {
+                      "type": "string",
+                      "enum": ["A", "I", "T"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/clientes": {
+      "get": {
+        "tags": ["Ivas"],
+        "description": "Obtener listado de los clientes por empresa.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "codigoEmpresa",
+            "in": "query",
+            "description": "Codigo de la empresa",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Numero de pagina",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Numero de pagina",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "estado",
+            "in": "query",
+            "description": "Estado del registro, por default solo trae activos",
+            "type": "string",
+            "enum": ["A", "I", "T"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Respuesta correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "codigoCliente": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "numeroIdentificacion": {
+                      "type": "string",
+                      "example": "0950637975"
+                    },
+                    "codigoTipoIdentificacion": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "descripcionTipoIdentificacion": {
+                      "type": "string",
+                      "example": "CEDULA"
+                    },
+                    "razonSocial": {
+                      "type": "string",
+                      "example": "DESARROLLOS MX"
+                    },
+                    "nombreComercial": {
+                      "type": "string",
+                      "example": "DESARROLLOS MX"
+                    },
+                    "placa": {
+                      "type": "string",
+                      "example": "ABC-1234"
+                    },
+                    "estado": {
+                      "type": "string",
+                      "enum": ["A", "I", "T"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/tipos_identificacion": {
+      "get": {
+        "tags": ["Tipos Identificacion"],
+        "description": "Obtener listado de los tipos de identificacion.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "query",
+            "description": "Estado del registro, por default solo trae activos",
+            "type": "string",
+            "enum": ["A", "I", "T"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Respuesta correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "codigoTipoIdentificacion": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "codigoTipoIdentificacionSRI": {
+                      "type": "string",
+                      "example": "C"
+                    },
+                    "descripcionTipoIdentificacion": {
+                      "type": "string",
+                      "example": "CEDULA"
+                    },
+                    "estado": {
+                      "type": "string",
+                      "enum": ["A", "I", "T"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "definitions": {}
+}
