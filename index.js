@@ -4,5 +4,5 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./apis/mx-general.json');
 
 app.use('/mx-general', swaggerUi.serve, swaggerUi.setup(swaggerDocument, null));
-
-app.listen(3005, () => console.log("http://localhost:3005/mx-general"));
+const port = process.env.PORT || 3005;
+app.listen(port, () => console.log("http://localhost:"+port+"/mx-general"));
