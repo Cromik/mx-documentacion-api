@@ -22,6 +22,26 @@
     {
       "name": "Tipos Identificacion",
       "description": "Apis para los tipo de identificación"
+    },
+    {
+      "name": "Sucursales",
+      "description": "Apis para de sucursales"
+    },
+    {
+      "name": "Util",
+      "description": "Servicios de utilidad"
+    },
+    {
+      "name": "Accesos API",
+      "description": "Consultan los URI base de las API que tiene el sistema"
+    },
+    {
+      "name": "Parametros",
+      "description": "Consulta el valor de un parametro"
+    },
+    {
+      "name": "Tipos de Comprobantes",
+      "description": "Tipos de Comprobantes"
     }
   ],
   "schemes": ["http"],
@@ -196,11 +216,68 @@
           }
         },
         "security": []
+      },
+      "post": {
+        "tags": ["Ivas"],
+        "description": "Creacion de Impuesto Valor Agregado",
+        "consumes":["application/json"],
+        "parameters": [
+          {
+            "name": "iva",
+            "description": "Creacion deIva",
+            "in":"body",
+            "required": true,
+            "schema": {
+              "type":"object",
+              "properties": {
+                "codigoAuxiliar":{
+                  "type":"string",
+                  "example":"0"
+                },
+                "descripcionIva":{
+                  "type":"string",
+                  "example":"0%"
+                },
+                "valorPorcentaje":{
+                  "type":"number",
+                  "example":"0"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Respuesta Correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": { }
+                }
+              }
+            }
+          }
+
+        }
       }
     },
     "/clientes": {
       "get": {
-        "tags": ["Ivas"],
+        "tags": ["Clientes"],
         "description": "Obtener listado de los clientes por empresa.",
         "produces": ["application/json"],
         "parameters": [
@@ -296,6 +373,86 @@
           }
         },
         "security": []
+      },
+      "post": {
+        "tags": ["Clientes"],
+        "description": "Creacion de Cliente",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "codigoEmpresa",
+            "in": "query",
+            "description": "codigo de la empresa",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "cliente",
+            "in": "body",
+            "description": "Crear un nuevo Cliente",
+            "schema": {
+              "type":"object",
+              "properties": {
+                "codigoTipoIdentificacion":{
+                  "type":"number",
+                  "example":1
+                },
+                "numeroIdentificacion":{
+                  "type":"string",
+                  "example":"0950637975"
+                },
+                "primerNombre":{
+                  "type":"string",
+                  "example":"MICHAEL"
+                },
+                "segundoNombre":{
+                  "type":"string",
+                  "example":"MARIO"
+                },
+                "primerApellido":{
+                  "type":"string",
+                  "example":"MELO"
+                },
+                "segundoApelligo":{
+                  "type":"string",
+                  "example":"PARRALES"
+                },
+                "correo":{
+                  "type":"string",
+                  "example":"michael@gmail.com"
+                }
+              }
+              
+            }
+
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Respuesta Correcta.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "default": 200
+                },
+                "status": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "ok"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": { }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/tipos_identificacion": {
